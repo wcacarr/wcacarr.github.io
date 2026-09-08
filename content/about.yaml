@@ -12,45 +12,83 @@ bio: >
   Cybersecurity education.
 
 roles:
-  - role: Security Analyst
-    org: Managed detection provider
-    years: "2023 — now"
+  - role: IT Manager
+    org: CapsLock Edu Ltd (Remote)
+    years: "Sep 2024 — Jan 2026"
     body: >
-      Triage and detection engineering across a mixed Windows and Linux
-      estate. Built the phishing triage playbook now used by the whole shift.
-  - role: IT Systems Administrator
-    org: Regional healthcare group
-    years: "2020 — 2023"
+      Maintained the ISMS and led ISO 27001 certification from gap analysis
+      to a successful audit, alongside Cyber Essentials and Cyber Essentials
+      Plus. Led the IT function for a fully remote organisation — security
+      strategy, risk and vendor management — and owned the Microsoft 365 /
+      Azure environment (Entra ID, Defender, Intune, AutoPilot). Led endpoint
+      security across Windows, macOS, iOS and Android, acted as senior
+      escalation (1st–3rd line), and delivered security awareness training.
+  - role: System Administrator
+    org: CapsLock Edu Ltd (Remote)
+    years: "Oct 2022 — Sep 2024"
     body: >
-      Owned patching, Group Policy and network segmentation for 900
-      endpoints. Led the migration off flat VLANs.
-  - role: IT Support Technician
-    org: MSP
-    years: "2019 — 2020"
+      Managed Azure infrastructure and endpoint security (Entra ID,
+      Defender, Intune, AutoPilot, Exchange). Carried out system audits,
+      security reviews and log monitoring, provided 1st–3rd line IT
+      support, and documented technical processes. Achieved CompTIA
+      Security+ and Azure Fundamentals (AZ-900); promoted to IT Manager
+      in 2024.
+  - role: Digital Content Creator & Project Manager
+    org: Self-employed
+    years: "May 2020 — Apr 2022"
     body: >
-      First line to third line across 40 client sites. Where the habit of
-      documenting everything started.
+      Ran self-directed projects and brand partnerships — including
+      Logitech, SteelSeries and Envato — producing content with millions
+      of views. Managed client relationships, timelines and deliverables
+      end to end.
+  - role: Digital Project Manager & Web Server Administrator
+    org: Conceptai, Yeovil
+    years: "Mar 2018 — May 2020"
+    body: >
+      Led IT projects and managed client accounts. Administered web
+      servers, domains and SSL certificates.
+  - role: IT Support & System Administrator
+    org: Sherborne Girls School
+    years: "Aug 2016 — Feb 2018"
+    body: >
+      Provided 1st–3rd line IT support and network security. Managed
+      Active Directory, Windows servers and SCCM, working with DHCP, DNS,
+      file storage, switching and routing.
 
 skills:
-  - Windows
+  - Microsoft 365
+  - Azure
+  - Entra ID
+  - Microsoft Defender
+  - Intune
+  - AutoPilot
+  - Exchange
+  - ISO 27001
+  - Risk Management
   - Active Directory
-  - Linux
-  - Bash
-  - PowerShell
-  - Networking
-  - Wireshark
-  - SIEM
-  - MITRE ATT&CK
-  - Sysmon
-  - Python
-  - Terraform
+  - Windows Server
+  - SCCM
+  - DNS / DHCP
+  - Security Awareness Training
 
 certs:
+  - name: ISO 27001:2022 Lead Implementer
+    year: ""
+  - name: Microsoft 365 Endpoint Administrator Associate (MD-102)
+    year: ""
   - name: CompTIA Security+
-    year: 2024
-  - name: Cisco CCNA
-    year: 2023
-  - name: RHCSA
+    year: ""
+  - name: Certified Cyber Security Practitioner (Ce-CSP)
+    year: ""
+  - name: Certificate of Cloud Security Knowledge (CCSK)
+    year: ""
+  - name: Certificate in Information Security Management Principles (CISMP)
+    year: ""
+  - name: Azure Fundamentals (AZ-900)
+    year: ""
+  - name: CIISec Cyber Security Qualification (Level 7)
     year: 2022
-  - name: BTL1 — Blue Team Level 1
-    year: 2024
+  - name: Azure Administrator Associate (AZ-104)
+    year: in progress
+  - name: SOC Analyst Level 1 (SAL1)
+    year: in progress

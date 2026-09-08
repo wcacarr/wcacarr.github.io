@@ -249,6 +249,12 @@
 
   // ---------- home ----------
 
+  function shortCertLabel(name) {
+    const paren = name.match(/\(([^)]+)\)\s*$/);
+    if (paren) return paren[1];
+    return name.split(":")[0];
+  }
+
   function renderHomeHero() {
     $("#home-eyebrow").textContent = ABOUT.eyebrow || "";
     $("#home-name").textContent = ABOUT.name || "";
@@ -256,6 +262,7 @@
     $("#home-handle").textContent = ABOUT.handle || "";
     $("#home-bio").textContent = ABOUT.bio || "";
     $("#menubar-handle").textContent = ABOUT.handle || "";
+    $("#sys-certs").textContent = (ABOUT.certs || []).slice(0, 3).map((c) => shortCertLabel(c.name)).join(" · ");
   }
 
   (function renderHomeTips() {

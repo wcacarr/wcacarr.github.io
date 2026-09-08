@@ -5,6 +5,18 @@
 # length / views / date are shown as-is (there's no YouTube API hookup here),
 # so update them by hand when you post — or drop them and they just won't show.
 
+- title: "RBAC in 15 minutes: roles, groups and the least-privilege trap"
+  youtube: ""
+  length: "15:03"
+  views: "—"
+  date: "just posted"
+  tags: ["#iam", "#azure", "#governance"]
+  description: >
+    Role-based access control explained from scratch: why role sprawl happens,
+    how to design roles around job function instead of job title, and the
+    review habit that keeps an access model honest. Companion post is on the
+    blog — pinned comment code CTF{4ppl0ck3r_1s_n0t_4v}.
+
 - title: "Hardening a Windows box: LAPS, AppLocker and the registry keys nobody mentions"
   youtube: ""
   length: "18:42"
@@ -15,7 +27,7 @@
     A full pass over a fresh Windows 11 install: local admin handling with LAPS,
     an AppLocker baseline that will not break your users, and the handful of
     registry keys worth changing by hand. Lab files and the baseline XML are
-    linked below — pinned comment code CTF{4ppl0ck3r_1s_n0t_4v}.
+    linked below.
 
 - title: "Subnetting explained with a whiteboard and no maths panic"
   youtube: ""
