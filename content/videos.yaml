@@ -1,0 +1,68 @@
+# Videos, newest first. `youtube:` is optional — paste a full YouTube URL (or
+# just the video ID) to embed the real video; leave it out to show a
+# placeholder until you have the link.
+#
+# length / views / date are shown as-is (there's no YouTube API hookup here),
+# so update them by hand when you post — or drop them and they just won't show.
+
+- title: "Hardening a Windows box: LAPS, AppLocker and the registry keys nobody mentions"
+  youtube: ""
+  length: "18:42"
+  views: "42K views"
+  date: "2 weeks ago"
+  tags: ["#windows", "#hardening", "#applocker"]
+  description: >
+    A full pass over a fresh Windows 11 install: local admin handling with LAPS,
+    an AppLocker baseline that will not break your users, and the handful of
+    registry keys worth changing by hand. Lab files and the baseline XML are
+    linked below — pinned comment code CTF{4ppl0ck3r_1s_n0t_4v}.
+
+- title: "Subnetting explained with a whiteboard and no maths panic"
+  youtube: ""
+  length: "24:05"
+  views: "128K views"
+  date: "1 month ago"
+  tags: ["#networking", "#ccna"]
+  description: >
+    The mental model I use for subnetting, worked through slowly with real
+    examples. No memorising tables.
+
+- title: "I broke into my own home lab — here is the whole kill chain"
+  youtube: ""
+  length: "31:17"
+  views: "76K views"
+  date: "1 month ago"
+  tags: ["#redteam", "#attack"]
+  description: >
+    Initial access to domain admin in one lab, mapped to ATT&CK at every step,
+    then the detections that would have caught me.
+
+- title: "Linux permissions: the one diagram that fixed it for me"
+  youtube: ""
+  length: "12:38"
+  views: "94K views"
+  date: "2 months ago"
+  tags: ["#linux", "#basics"]
+  description: >
+    Owner, group, other, and the special bits. Plus the three commands I run
+    when something is inexplicably denied.
+
+- title: "Phishing email teardown, live"
+  youtube: ""
+  length: "16:20"
+  views: "51K views"
+  date: "2 months ago"
+  tags: ["#soc", "#email"]
+  description: >
+    Reading raw headers, checking SPF and DKIM, sandboxing the attachment,
+    writing the verdict up for a manager.
+
+- title: "Build a detection lab for under £200"
+  youtube: ""
+  length: "22:54"
+  views: "63K views"
+  date: "3 months ago"
+  tags: ["#homelab", "#siem"]
+  description: >
+    Hardware choices, hypervisor setup, and a Sysmon plus SIEM pipeline you can
+    rebuild in an afternoon.

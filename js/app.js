@@ -13,6 +13,12 @@
 
   const STAGE = $("#stage");
 
+  // ---------- editable content (loaded async from content/ — see content.js) ----------
+
+  let POSTS = [];
+  let VIDEOS = [];
+  let ABOUT = {};
+
   // ---------- persistence ----------
 
   const SAVE_KEY = "wcos-save-v1";
@@ -206,21 +212,23 @@
 
   // ---------- widgets ----------
 
-  (function renderWidgetVideo() {
+  function renderWidgetVideo() {
     const v = VIDEOS[0];
+    if (!v) return;
     $(".widget-video-title").textContent = v.title;
-    $(".thumb .tag").textContent = `youtube embed · ${v.length}`;
-  })();
+    $(".thumb .tag").textContent = v.length ? `youtube embed · ${v.length}` : "youtube embed";
+  }
 
-  (function renderWidgetPosts() {
+  function renderWidgetPosts() {
     const host = $("#widget-posts");
+    host.innerHTML = "";
     POSTS.slice(0, 3).forEach((p) => {
       const b = el("button", "post-row");
       b.innerHTML = `<div class="title">${escapeHtml(p.title)}</div><div class="meta">${escapeHtml(p.meta)}</div>`;
       b.addEventListener("click", () => openWin("blog"));
       host.appendChild(b);
     });
-  })();
+  }
 
   (function renderWidgetShortcuts() {
     const host = $("#widget-shortcuts");
@@ -241,6 +249,15 @@
 
   // ---------- home ----------
 
+  function renderHomeHero() {
+    $("#home-eyebrow").textContent = ABOUT.eyebrow || "";
+    $("#home-name").textContent = ABOUT.name || "";
+    $("#home-field").textContent = ABOUT.field || "";
+    $("#home-handle").textContent = ABOUT.handle || "";
+    $("#home-bio").textContent = ABOUT.bio || "";
+    $("#menubar-handle").textContent = ABOUT.handle || "";
+  }
+
   (function renderHomeTips() {
     const host = $("#home-tips");
     TIPS.forEach((t) => {
@@ -252,14 +269,25 @@
 
   // ---------- videos ----------
 
+  function renderVideoPlayer(v) {
+    const host = $("#video-player");
+    if (v.videoId) {
+      host.innerHTML = `<iframe width="100%" height="100%" style="border:0" src="https://www.youtube-nocookie.com/embed/${v.videoId}" title="${escapeHtml(v.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    } else {
+      host.innerHTML = `<div class="play">▶</div><span class="tag">YOUTUBE EMBED · 16:9</span>`;
+    }
+  }
+
   function renderVideoWindow() {
     const v = VIDEOS[state.videoIx];
+    if (!v) return;
+    renderVideoPlayer(v);
     $("#video-title").textContent = v.title;
     $("#video-views").textContent = v.views;
     $("#video-date").textContent = v.date;
     $("#video-length").textContent = v.length;
     $("#video-desc").textContent = v.desc;
-    $("#video-count").textContent = `${VIDEOS.length} of 148`;
+    $("#video-count").textContent = `${VIDEOS.length} video${VIDEOS.length === 1 ? "" : "s"}`;
     const tagHost = $("#video-tags");
     tagHost.innerHTML = "";
     v.tags.forEach((t) => tagHost.appendChild(el("span", "chip", escapeHtml(t))));
@@ -268,13 +296,12 @@
     rowHost.innerHTML = "";
     VIDEOS.forEach((vid, i) => {
       const b = el("button", "pl-row" + (i === state.videoIx ? " active" : ""));
-      b.innerHTML = `<div class="pl-thumb"><span class="len">${vid.length}</span></div>` +
+      b.innerHTML = `<div class="pl-thumb">${vid.videoId ? `<img src="https://img.youtube.com/vi/${vid.videoId}/mqdefault.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:6px" />` : ""}<span class="len">${vid.length}</span></div>` +
         `<div class="pl-info"><div class="title">${escapeHtml(vid.title)}</div><div class="views">${escapeHtml(vid.views)}</div></div>`;
       b.addEventListener("click", () => { state.videoIx = i; renderVideoWindow(); });
       rowHost.appendChild(b);
     });
   }
-  renderVideoWindow();
 
   // ---------- blog ----------
 
@@ -286,43 +313,43 @@
       if (q && !p.title.toLowerCase().includes(q)) return;
       const b = el("button", "blog-row" + (i === state.postIx ? " active" : ""));
       b.innerHTML = `<div class="title">${escapeHtml(p.title)}</div><div class="meta">${escapeHtml(p.meta)}</div>`;
-      b.addEventListener("click", () => { state.postIx = i; renderBlogWindow(); renderBlogList($("#blog-search").value); });
+      b.addEventListener("click", () => { state.postIx = i; renderBlogReader(); renderBlogList($("#blog-search").value); });
       rowHost.appendChild(b);
     });
   }
   function renderBlogReader() {
     const p = POSTS[state.postIx];
+    if (!p) return;
     $("#post-meta").textContent = p.meta;
     $("#post-title").textContent = p.title;
-    const bodyHost = $("#post-body");
-    bodyHost.innerHTML = "";
-    p.body.forEach((para) => bodyHost.appendChild(el("p", null, escapeHtml(para))));
-    $("#post-code").innerHTML = p.code.map((line) => `<div>${escapeHtml(line)}</div>`).join("");
+    $("#post-body").innerHTML = p.html;
   }
-  function renderBlogWindow() { renderBlogReader(); }
-  renderBlogList("");
-  renderBlogReader();
   $("#blog-search").addEventListener("input", (e) => renderBlogList(e.target.value));
 
   // ---------- about ----------
 
-  (function renderAbout() {
+  function renderAbout() {
+    $("#about-name").textContent = ABOUT.name || "";
+    $("#about-tagline").textContent = ABOUT.tagline || "";
     const roleHost = $("#about-roles");
-    ROLES.forEach((r) => {
+    roleHost.innerHTML = "";
+    (ABOUT.roles || []).forEach((r) => {
       const item = el("div", "exp-item");
       item.innerHTML = `<div class="row"><span class="role">${escapeHtml(r.role)}</span><span class="years">${escapeHtml(r.years)}</span></div>` +
         `<div class="org">${escapeHtml(r.org)}</div><p>${escapeHtml(r.body)}</p>`;
       roleHost.appendChild(item);
     });
     const skillHost = $("#about-skills");
-    SKILLS.forEach((sk) => skillHost.appendChild(el("span", "skill-chip", escapeHtml(sk))));
+    skillHost.innerHTML = "";
+    (ABOUT.skills || []).forEach((sk) => skillHost.appendChild(el("span", "skill-chip", escapeHtml(sk))));
     const certHost = $("#about-certs");
-    CERTS.forEach((c) => {
+    certHost.innerHTML = "";
+    (ABOUT.certs || []).forEach((c) => {
       const row = el("div", "cert-row");
       row.innerHTML = `<span>${escapeHtml(c.name)}</span><span class="year">${escapeHtml(c.year)}</span>`;
       certHost.appendChild(row);
     });
-  })();
+  }
 
   // ---------- contact ----------
 
@@ -466,9 +493,8 @@
       }
       case "cat":
         if (args[0] === "about.txt") {
-          pushTermLine("William Carr — Cyber Security.");
-          pushTermLine("I make content so anyone can learn to use technology.");
-          pushTermLine("Windows · Linux · Networking · Security education.");
+          pushTermLine(`${ABOUT.name || "—"} — ${ABOUT.field || "—"}.`);
+          pushTermLine(ABOUT.bio || "");
         } else if (args[0] === "contact.txt") {
           pushTermLine("youtube.com/@bitnye");
           pushTermLine("hello@bitnye.dev");
@@ -556,4 +582,26 @@
   // ---------- boot ----------
 
   syncChrome();
+
+  window.loadContent().then((content) => {
+    POSTS = content.posts;
+    VIDEOS = content.videos;
+    ABOUT = content.about;
+    renderHomeHero();
+    renderWidgetVideo();
+    renderWidgetPosts();
+    renderVideoWindow();
+    renderBlogList("");
+    renderBlogReader();
+    renderAbout();
+  }).catch((err) => {
+    console.error("failed to load content/:", err);
+    const banner = el("div", null,
+      "Couldn't load site content (blog/videos/about). If you're opening this file directly, " +
+      "run a local server instead — see the README — since browsers block plain file:// fetches.");
+    banner.style.cssText = "position:absolute;left:50%;top:44px;transform:translateX(-50%);z-index:9500;" +
+      "max-width:520px;padding:12px 16px;border-radius:10px;background:rgba(236,106,94,0.15);" +
+      "border:1px solid rgba(236,106,94,0.4);color:#e9ebee;font-size:12.5px;line-height:1.5;text-align:center";
+    STAGE.appendChild(banner);
+  });
 })();

@@ -26,7 +26,7 @@
     <div class="spacer"></div>
     <div class="status">
       <span class="online"><span class="dot"></span>online</span>
-      <span>@BitNye</span>
+      <span id="menubar-handle">@BitNye</span>
       <span class="clock" id="clock"></span>
     </div>
   </div>
@@ -89,10 +89,10 @@
     <div class="window-body">
       <div class="home-grid">
         <div class="home-left">
-          <span class="eyebrow" style="color:var(--cyan)">SECURITY &amp; TECH EDUCATION</span>
-          <h1>William Carr</h1>
-          <div class="home-sub"><span>Cyber Security</span><span class="sep">/</span><span class="handle">@BitNye</span></div>
-          <p>I make content with the goal of providing everyone with the opportunity to learn how to use technology. Specialising in Windows, Linux, Networking and Cybersecurity education.</p>
+          <span class="eyebrow" id="home-eyebrow" style="color:var(--cyan)"></span>
+          <h1 id="home-name"></h1>
+          <div class="home-sub"><span id="home-field"></span><span class="sep">/</span><span class="handle" id="home-handle"></span></div>
+          <p id="home-bio"></p>
           <div class="home-actions">
             <button class="btn-primary" data-open="videos">Watch the videos →</button>
             <button class="btn-ghost" data-open="about">View résumé</button>
@@ -120,7 +120,7 @@
     <div class="window-body">
       <div class="videos-layout">
         <div class="video-main">
-          <div class="video-player">
+          <div class="video-player" id="video-player">
             <div class="play">▶</div>
             <span class="tag">YOUTUBE EMBED · 16:9</span>
           </div>
@@ -160,7 +160,6 @@
           <span class="eyebrow" id="post-meta"></span>
           <h1 id="post-title"></h1>
           <div class="blog-body" id="post-body"></div>
-          <div class="blog-code" id="post-code"></div>
         </div>
       </div>
     </div>
@@ -182,8 +181,8 @@
         <div class="about-head">
           <div class="about-photo">photo<br />here</div>
           <div>
-            <h1>William Carr</h1>
-            <div class="about-role">Cyber Security · Windows / Linux / Networking · Educator</div>
+            <h1 id="about-name"></h1>
+            <div class="about-role" id="about-tagline"></div>
             <div class="about-actions">
               <button class="btn-primary small">Download PDF</button>
               <button class="btn-ghost small" data-open="contact">Get in touch</button>
@@ -318,7 +317,10 @@
   <div id="dock"></div>
 </div>
 
+<script src="js/vendor/marked.min.js"></script>
+<script src="js/vendor/js-yaml.min.js"></script>
 <script src="js/data.js"></script>
+<script src="js/content.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

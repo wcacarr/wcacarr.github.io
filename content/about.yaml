@@ -1,0 +1,56 @@
+# Your name, headline and résumé. Edit this file and push — it drives both
+# the Home window and the About/résumé window.
+
+name: William Carr
+eyebrow: Security & tech education
+field: Cyber Security
+handle: "@BitNye"
+tagline: Cyber Security · Windows / Linux / Networking · Educator
+bio: >
+  I make content with the goal of providing everyone with the opportunity to
+  learn how to use technology. Specialising in Windows, Linux, Networking and
+  Cybersecurity education.
+
+roles:
+  - role: Security Analyst
+    org: Managed detection provider
+    years: "2023 — now"
+    body: >
+      Triage and detection engineering across a mixed Windows and Linux
+      estate. Built the phishing triage playbook now used by the whole shift.
+  - role: IT Systems Administrator
+    org: Regional healthcare group
+    years: "2020 — 2023"
+    body: >
+      Owned patching, Group Policy and network segmentation for 900
+      endpoints. Led the migration off flat VLANs.
+  - role: IT Support Technician
+    org: MSP
+    years: "2019 — 2020"
+    body: >
+      First line to third line across 40 client sites. Where the habit of
+      documenting everything started.
+
+skills:
+  - Windows
+  - Active Directory
+  - Linux
+  - Bash
+  - PowerShell
+  - Networking
+  - Wireshark
+  - SIEM
+  - MITRE ATT&CK
+  - Sysmon
+  - Python
+  - Terraform
+
+certs:
+  - name: CompTIA Security+
+    year: 2024
+  - name: Cisco CCNA
+    year: 2023
+  - name: RHCSA
+    year: 2022
+  - name: BTL1 — Blue Team Level 1
+    year: 2024
