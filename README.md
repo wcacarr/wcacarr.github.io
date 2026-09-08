@@ -1,9 +1,10 @@
-# wcacarr.github.io
+# wcarr.no
 
 William Carr's ("@BitNye") portfolio — a browser-desktop OS with windows for
 Home, Videos, Blog, About/résumé, Contact, Guestbook, and a hidden terminal + CTF.
 
-Live at https://wcacarr.github.io/
+Live at https://wcarr.no/ (repo is `wcacarr/wcacarr.github.io` — see "Custom
+domain" below for how that maps to wcarr.no)
 
 Plain HTML/CSS/JS, no build step or dependencies. Content lives in plain text
 files under `content/` — edit those to update the site, no code required.
@@ -137,6 +138,31 @@ Add a `description:` field to a post's front matter for a hand-written
 meta description; otherwise one is generated automatically from the first
 ~160 characters of the post.
 
+## Custom domain
+
+The site is set up to serve from **wcarr.no** (see `SITE_URL` at the top of
+`scripts/build-site.js` — that's what all the canonical/OG/sitemap URLs are
+built from) rather than the default `wcacarr.github.io`. Two pieces make
+that work:
+
+- A `CNAME` file at the repo root containing `wcarr.no` — this is what
+  actually tells GitHub Pages to serve the custom domain. The build script
+  carries it into every deploy automatically.
+- DNS records at the registrar (one.com) pointing the domain at GitHub
+  Pages: **A records** for `wcarr.no` → `185.199.108.153`,
+  `185.199.109.153`, `185.199.110.153`, `185.199.111.153` (add **AAAA**
+  records too for IPv6 — `2606:50c0:8000::153` / `8001::153` / `8002::153`
+  / `8003::153`). Optionally a **CNAME record** for `www` → `wcacarr.github.io`
+  if `www.wcarr.no` should work too.
+
+Once DNS propagates, GitHub auto-issues an HTTPS certificate for the domain
+(can take a few minutes to a few hours) — check **Settings → Pages** for a
+green "DNS check successful" and then tick **Enforce HTTPS**. Visits to
+`wcacarr.github.io` redirect to `wcarr.no` automatically once the custom
+domain is active — no separate redirect setup needed.
+
+If you ever change the domain again, update both `CNAME` and `SITE_URL`.
+
 ## Structure
 
 - `index.html` — page structure / static window chrome
@@ -153,6 +179,7 @@ meta description; otherwise one is generated automatically from the first
   every push to `main`
 - `js/vendor/` — small local copies of `marked` (Markdown) and `js-yaml`
   (YAML) — no CDN dependency; also `require`d directly by the build script
+- `CNAME` — the custom domain (`wcarr.no`); see "Custom domain" above
 
 ## Notes
 

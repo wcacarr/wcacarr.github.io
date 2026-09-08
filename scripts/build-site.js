@@ -17,7 +17,7 @@ const path = require("path");
 
 const ROOT = path.join(__dirname, "..");
 const OUT = path.join(ROOT, "_site");
-const SITE_URL = process.env.SITE_URL || "https://wcacarr.github.io";
+const SITE_URL = process.env.SITE_URL || "https://wcarr.no";
 
 const marked = require(path.join(ROOT, "js/vendor/marked.min.js"));
 const yaml = require(path.join(ROOT, "js/vendor/js-yaml.min.js"));
@@ -246,7 +246,7 @@ function build() {
   rmrf(OUT);
   mkdirp(OUT);
 
-  for (const name of ["index.html", "css", "js", "content", "assets", ".nojekyll"]) {
+  for (const name of ["index.html", "css", "js", "content", "assets", ".nojekyll", "CNAME"]) {
     const src = path.join(ROOT, name);
     if (!fs.existsSync(src)) continue;
     const dest = path.join(OUT, name);
