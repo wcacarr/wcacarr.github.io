@@ -2,6 +2,10 @@
 title: RBAC in plain English, and where teams get it wrong
 date: 2026-09-08
 read_time: 6 min
+description: >
+  Why role-based access control breaks down in practice, and three habits —
+  job function over job title, scheduled reviews, time-bound temporary
+  access — that keep it clean.
 ---
 
 Role-based access control sounds like a solved problem until you actually sit down and design one. The idea is simple: users get roles, roles get permissions, nobody gets access directly. In practice most environments end up with a pile of one-off exceptions bolted onto the model, and six months later nobody can explain why a given account can do what it can.

@@ -46,6 +46,12 @@
     return m ? m[1] : null;
   }
 
+  // Mirrors scripts/build-site.js's slugFor — must stay in sync so the
+  // in-app "view full post" link points at the page that script generates.
+  function slugFor(filename) {
+    return filename.replace(/\.md$/, "").replace(/^\d{4}-\d{2}-\d{2}-/, "");
+  }
+
   async function fetchText(path) {
     const res = await fetch(path, { cache: "no-cache" });
     if (!res.ok) throw new Error(`could not load ${path} (${res.status})`);
@@ -61,6 +67,7 @@
         title: data.title || filename,
         date: isoDate(data.date),
         meta: formatPostMeta(data.date, data.read_time),
+        slug: slugFor(filename),
         html: window.marked.parse(body || "")
       };
     }));

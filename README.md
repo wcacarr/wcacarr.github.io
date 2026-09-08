@@ -112,6 +112,31 @@ resume: assets/resume.pdf
 Leave either blank and that part of the site keeps its placeholder — the
 "photo here" box, or a disabled Download PDF button.
 
+## SEO — real static pages per blog post
+
+The interactive site is one page (everything lives behind JS-rendered
+windows), which is bad for search ranking: there's no separate URL per post
+for Google to index. `scripts/build-site.js` fixes this — it runs
+automatically on every push (see below) and generates a real, plain-HTML
+page per post at `/blog/<slug>/`, plus a `/blog/` index, `sitemap.xml` and
+`robots.txt`. Those pages have actual `<title>`/description/Open Graph tags
+and the post content sitting directly in the HTML — no JavaScript required
+to read them. The interactive Blog window links out to each post's static
+page ("View this post's own page ↗"), and vice versa.
+
+You never run this script by hand — a GitHub Actions workflow
+(`.github/workflows/deploy.yml`) runs it on every push to `main` and
+deploys the result. **One-time setup required:** in this repo's Settings →
+Pages, change **Source** from "Deploy from a branch" to **"GitHub
+Actions"**. Until that's switched, Pages keeps serving the old
+branch-deploy version and the workflow's output won't go live (the
+workflow will still run — you can watch it under the Actions tab — it just
+won't be the thing Pages actually serves).
+
+Add a `description:` field to a post's front matter for a hand-written
+meta description; otherwise one is generated automatically from the first
+~160 characters of the post.
+
 ## Structure
 
 - `index.html` — page structure / static window chrome
@@ -122,8 +147,12 @@ Leave either blank and that part of the site keeps its placeholder — the
   flags, terminal filesystem) — edit occasionally, not routine content
 - `js/content.js` — loads and parses `content/` into what the page renders
 - `js/app.js` — window manager, terminal emulator, CTF + guestbook logic
+- `scripts/build-site.js` — generates `_site/` (gitignored): a copy of the
+  app plus the static blog pages, sitemap and robots.txt
+- `.github/workflows/deploy.yml` — runs the build and deploys to Pages on
+  every push to `main`
 - `js/vendor/` — small local copies of `marked` (Markdown) and `js-yaml`
-  (YAML) — no CDN dependency
+  (YAML) — no CDN dependency; also `require`d directly by the build script
 
 ## Notes
 

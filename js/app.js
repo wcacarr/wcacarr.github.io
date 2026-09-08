@@ -330,6 +330,9 @@
     $("#post-meta").textContent = p.meta;
     $("#post-title").textContent = p.title;
     $("#post-body").innerHTML = p.html;
+    const permalink = $("#post-permalink");
+    if (p.slug) { permalink.href = `blog/${p.slug}/`; permalink.hidden = false; }
+    else { permalink.hidden = true; }
   }
   $("#blog-search").addEventListener("input", (e) => renderBlogList(e.target.value));
 
