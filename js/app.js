@@ -338,6 +338,33 @@
   function renderAbout() {
     $("#about-name").textContent = ABOUT.name || "";
     $("#about-tagline").textContent = ABOUT.tagline || "";
+
+    const photoHost = $("#about-photo");
+    photoHost.innerHTML = "";
+    if (ABOUT.photo) {
+      const img = document.createElement("img");
+      img.src = ABOUT.photo;
+      img.alt = ABOUT.name || "";
+      img.style.cssText = "width:100%;height:100%;object-fit:cover;border-radius:16px";
+      photoHost.appendChild(img);
+    } else {
+      photoHost.innerHTML = "photo<br />here";
+    }
+
+    const dl = $("#resume-download");
+    if (ABOUT.resume) {
+      dl.href = ABOUT.resume;
+      dl.target = "_blank";
+      dl.rel = "noopener noreferrer";
+      dl.style.pointerEvents = "";
+      dl.style.opacity = "";
+      dl.title = "";
+    } else {
+      dl.removeAttribute("href");
+      dl.style.pointerEvents = "none";
+      dl.style.opacity = "0.5";
+      dl.title = "Add content/about.yaml → resume: path/to/your.pdf to enable this";
+    }
     const roleHost = $("#about-roles");
     roleHost.innerHTML = "";
     (ABOUT.roles || []).forEach((r) => {

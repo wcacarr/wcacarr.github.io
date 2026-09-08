@@ -99,11 +99,25 @@ certs:
 
 Add, remove or reorder entries in `roles`, `skills`, `certs` freely.
 
+### Your photo and résumé PDF — `assets/`
+
+Drop your files in `assets/` (e.g. `assets/photo.jpg`, `assets/resume.pdf`),
+then point to them in `content/about.yaml`:
+
+```yaml
+photo: assets/photo.jpg
+resume: assets/resume.pdf
+```
+
+Leave either blank and that part of the site keeps its placeholder — the
+"photo here" box, or a disabled Download PDF button.
+
 ## Structure
 
 - `index.html` — page structure / static window chrome
 - `css/style.css` — all styling
 - `content/` — **edit this** — blog posts, videos, About/résumé
+- `assets/` — **drop files here** — your headshot and résumé PDF
 - `js/data.js` — fixed site mechanics (contact links, guestbook seed, CTF
   flags, terminal filesystem) — edit occasionally, not routine content
 - `js/content.js` — loads and parses `content/` into what the page renders

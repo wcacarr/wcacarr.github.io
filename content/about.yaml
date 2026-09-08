@@ -11,6 +11,14 @@ bio: >
   learn how to use technology. Specialising in Windows, Linux, Networking and
   Cybersecurity education.
 
+# Path to your headshot, relative to the site root — e.g. assets/photo.jpg.
+# Leave blank to keep the "photo here" placeholder box.
+photo: ""
+
+# Path to your résumé PDF, relative to the site root — e.g. assets/resume.pdf.
+# Leave blank and the Download PDF button stays disabled.
+resume: ""
+
 roles:
   - role: IT Manager
     org: CapsLock Edu Ltd (Remote)
