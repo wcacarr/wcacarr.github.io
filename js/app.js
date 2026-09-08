@@ -217,6 +217,14 @@
     if (!v) return;
     $(".widget-video-title").textContent = v.title;
     $(".thumb .tag").textContent = v.length ? `youtube embed · ${v.length}` : "youtube embed";
+    const thumb = $(".thumb");
+    let img = thumb.querySelector("img");
+    if (v.videoId) {
+      if (!img) { img = document.createElement("img"); img.alt = ""; thumb.insertBefore(img, thumb.firstChild); }
+      img.src = `https://img.youtube.com/vi/${v.videoId}/mqdefault.jpg`;
+    } else if (img) {
+      img.remove();
+    }
   }
 
   function renderWidgetPosts() {
