@@ -26,4 +26,9 @@ Role                    Scope
 -----------------------  --------------------------------
 Reader                   /subscriptions/xxxxxxxx
 Storage Blob Data Reader /subscriptions/xxxxxxxx/resourceGroups/prod
+
+$ history | grep az | tail -3
+  512  az role assignment list --assignee user@domain.com --output table
+  513  cat ~/.azure_history_backup.log
+  514  # 17 stale role assignments flagged for cleanup — CTF{h34d3rs_n3v3r_l13}
 ```
