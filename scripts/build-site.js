@@ -179,6 +179,9 @@ function pageShell({ title, description, canonical, ogType, bodyHtml }) {
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="${escapeHtml(title)}">
 <meta name="twitter:description" content="${escapeHtml(description)}">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 ${FONT_LINK}
 <style>${ARTICLE_STYLE}</style>
 </head>
@@ -246,7 +249,7 @@ function build() {
   rmrf(OUT);
   mkdirp(OUT);
 
-  for (const name of ["index.html", "css", "js", "content", "assets", ".nojekyll", "CNAME"]) {
+  for (const name of ["index.html", "css", "js", "content", "assets", ".nojekyll", "CNAME", "favicon.svg", "favicon.png", "apple-touch-icon.png"]) {
     const src = path.join(ROOT, name);
     if (!fs.existsSync(src)) continue;
     const dest = path.join(OUT, name);
