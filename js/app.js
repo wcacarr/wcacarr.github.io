@@ -476,10 +476,90 @@
     msgEl.textContent = n === 5 ? "all five captured — nicely done, now go get in touch" : `flag accepted — ${hit.name} (${n}/5)`;
     msgEl.className = "ctf-msg ok";
     renderCtf();
+    if (n === 5) showCelebration();
   }
   renderCtf();
   $("#ctf-submit").addEventListener("click", submitFlag);
   $("#ctf-input").addEventListener("keydown", (e) => { if (e.key === "Enter") submitFlag(); });
+
+  // ---------- CTF celebration: confetti + chime on 5/5 ----------
+
+  function launchConfetti() {
+    const canvas = $("#confetti-canvas");
+    const rect = STAGE.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return;
+    const colors = ["oklch(0.80 0.13 195)", "oklch(0.74 0.14 305)", "oklch(0.78 0.16 150)", "oklch(0.80 0.14 80)", "#e9ebee"];
+    const particles = Array.from({ length: 150 }, () => ({
+      x: Math.random() * canvas.width,
+      y: -20 - Math.random() * canvas.height * 0.5,
+      w: 6 + Math.random() * 5,
+      h: 4 + Math.random() * 6,
+      vy: 2 + Math.random() * 2.5,
+      vx: (Math.random() - 0.5) * 2.2,
+      rot: Math.random() * Math.PI * 2,
+      vrot: (Math.random() - 0.5) * 0.25,
+      color: colors[(Math.random() * colors.length) | 0]
+    }));
+    const maxFrames = 260;
+    let frame = 0;
+    (function tick() {
+      frame++;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const p of particles) {
+        p.x += p.vx; p.y += p.vy; p.vy += 0.03; p.rot += p.vrot;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.globalAlpha = frame > maxFrames - 40 ? Math.max(0, (maxFrames - frame) / 40) : 1;
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      }
+      if (frame < maxFrames) requestAnimationFrame(tick);
+      else ctx.clearRect(0, 0, canvas.width, canvas.height);
+    })();
+  }
+
+  function playChime() {
+    try {
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return;
+      const ctx = new Ctx();
+      const notes = [523.25, 659.25, 783.99, 1046.5]; // C5 E5 G5 C6
+      const start = ctx.currentTime;
+      notes.forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.value = freq;
+        const t0 = start + i * 0.11;
+        gain.gain.setValueAtTime(0, t0);
+        gain.gain.linearRampToValueAtTime(0.18, t0 + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.5);
+        osc.connect(gain).connect(ctx.destination);
+        osc.start(t0);
+        osc.stop(t0 + 0.55);
+      });
+      setTimeout(() => ctx.close(), 1200);
+    } catch (e) { /* Web Audio unavailable — silent is fine */ }
+  }
+
+  function showCelebration() {
+    $("#ctf-celebration").hidden = false;
+    launchConfetti();
+    playChime();
+  }
+  function hideCelebration() { $("#ctf-celebration").hidden = true; }
+
+  $("#cc-dismiss").addEventListener("click", hideCelebration);
+  $("#cc-contact").addEventListener("click", () => { hideCelebration(); openWin("contact"); });
+  $("#ctf-celebration").addEventListener("click", (e) => { if (e.target.id === "ctf-celebration") hideCelebration(); });
+  window.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("#ctf-celebration").hidden) hideCelebration(); });
 
   // ---------- terminal ----------
 
