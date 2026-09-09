@@ -67,6 +67,10 @@ input, textarea { font: inherit; }
    overflowing layout */
 @media (max-width: 1099px), (max-height: 679px) {
   #mobile-gate { display: flex; }
+  /* #stage's own min-width/min-height (above) would otherwise force the
+     layout viewport wider than the device and get the whole page,
+     gate included, shrunk to fit by the mobile browser */
+  #stage { display: none; }
 }
 .mg-card {
   width: min(92vw, 440px);
