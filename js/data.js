@@ -20,7 +20,7 @@ const FILES = {
 const LINKS = [
   { kind: "youtube", value: "youtube.com/@bitnye", href: "https://youtube.com/@bitnye" },
   { kind: "email", value: "wcacarr@proton.me", href: "mailto:wcacarr@proton.me" },
-  { kind: "linkedin", value: "in/will-carr-mbcs-afciis-92068510b/", href: "https://www.linkedin.com/in/will-carr-mbcs-afciis-92068510b/r" },
+  { kind: "linkedin", value: "in/will-carr-mbcs-afciis-92068510b/", href: "https://www.linkedin.com/in/will-carr-mbcs-afciis-92068510b/" },
 ];
 
 const GUESTS_SEED = [

@@ -51,6 +51,50 @@ input, textarea { font: inherit; }
   user-select: none;
 }
 
+/* mobile / tablet gate — WC/OS needs a mouse and a bigger screen */
+
+#mobile-gate {
+  display: none;
+  position: fixed; inset: 0; z-index: 20000;
+  align-items: center; justify-content: center;
+  padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
+  background: rgba(7,8,10,0.55);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+}
+/* matches #stage's own min-width/min-height below — anything smaller than
+   the desktop stage can actually fit gets the gate instead of a cramped,
+   overflowing layout */
+@media (max-width: 1099px), (max-height: 679px) {
+  #mobile-gate { display: flex; }
+}
+.mg-card {
+  width: min(92vw, 440px);
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: clamp(24px, 6vw, 36px) clamp(20px, 5vw, 30px);
+  border-radius: 20px;
+  text-align: center;
+  background: rgba(16,19,24,0.88);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 30px 90px rgba(0,0,0,0.55);
+  font-family: 'Space Grotesk', Helvetica, sans-serif;
+  color: var(--ink);
+}
+.mg-mark {
+  width: 52px; height: 52px; margin: 0 auto; border-radius: 14px;
+  background: linear-gradient(140deg, var(--cyan), var(--violet));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 700; color: var(--bg);
+}
+.mg-eyebrow {
+  margin-top: 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  letter-spacing: 0.16em; color: var(--ink-faint);
+}
+.mg-title { margin-top: 10px; font-size: clamp(22px, 6vw, 28px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+.mg-sub { margin-top: 4px; font-size: clamp(15px, 4vw, 18px); font-weight: 600; color: var(--cyan); }
+.mg-body { margin: 16px 0 0; font-size: 13.5px; line-height: 1.6; color: var(--ink-mute); }
+
 .stage-grid {
   position: absolute; inset: 0;
   background-image:
