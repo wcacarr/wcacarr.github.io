@@ -17,7 +17,7 @@ photo: ""
 
 # Path to your résumé PDF, relative to the site root — e.g. assets/resume.pdf.
 # Leave blank and the Download PDF button stays disabled.
-resume: ""
+resume: "assets/resume.pdf"
 
 roles:
   - role: IT Manager
