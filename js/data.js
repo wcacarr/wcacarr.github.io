@@ -19,9 +19,8 @@ const FILES = {
 
 const LINKS = [
   { kind: "youtube", value: "youtube.com/@bitnye", href: "https://youtube.com/@bitnye" },
-  { kind: "email", value: "hello@bitnye.dev", href: "mailto:hello@bitnye.dev" },
-  { kind: "linkedin", value: "/in/williamcarr", href: "https://linkedin.com/in/williamcarr" },
-  { kind: "github", value: "github.com/bitnye", href: "https://github.com/bitnye" }
+  { kind: "email", value: "wcacarr@proton.me", href: "mailto:wcacarr@proton.me" },
+  { kind: "linkedin", value: "in/will-carr-mbcs-afciis-92068510b/", href: "https://www.linkedin.com/in/will-carr-mbcs-afciis-92068510b/r" },
 ];
 
 const GUESTS_SEED = [
